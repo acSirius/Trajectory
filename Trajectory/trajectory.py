@@ -1,12 +1,16 @@
 #Imports
+import matplotlib.pyplot as plt
 
 #Variables
 g = -9.8
+axisY = []
 
 #Functions 
 def sy(b, t): #Given an initial velocity and a time,  find how high the particle is. 
     global g
-    print('Height is: ', b*t + 0.5*g*t**2, 'm')
+    height = b*t + 0.5*g*t**2
+    print('Height is: ', height, 'm')
+    return height
 
 def sx(q, t): #Given an initial velocity and a time,  find how far the particle is from the starting point. 
     global g
@@ -33,6 +37,11 @@ def highPoint(b): #Highest point
 
     print('Highest point is: ', b*t + 0.5*g*t**2, ' m')
 
+def maxTime(b): #time when sy = 0
+    return b/4.9
+def plotting(b, t):
+    return b*t + 0.5*g*t**2
+
 #Run code
 print('By entering the initial speed in the x and y axis, you can find the highest point, the range, velocity in the x and y axis at any given time and range at any given time in both the x and y axis')
 q = float(input('Enter x axis initial speed: '))
@@ -50,3 +59,17 @@ vx(q, t)
 print('')
 range(b, q)
 highPoint(b)
+
+#Pot sy
+
+landTime = maxTime(b)
+i = 0
+while i < landTime:
+    axisY.append(plotting(b, i))
+    i = i + 0.1
+
+
+plt.plot(axisY)
+plt.ylabel('Height in meters')
+plt.xlabel('Time in seconds')
+plt.show()
